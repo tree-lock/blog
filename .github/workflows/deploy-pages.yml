@@ -3,6 +3,8 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [release]
+  # push 无新提交时不会触发（git push 显示 Everything up-to-date）；可手动运行
+  workflow_dispatch:
 
 permissions:
   contents: read
