@@ -1,10 +1,14 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { SITE_TITLE } from "@/lib/title/site-title";
+import { useDocumentTitle } from "@/lib/title/use-document-title";
 
 export const Route = createFileRoute("/about")({
 	component: About,
 });
 
 function About() {
+	useDocumentTitle(`About · ${SITE_TITLE}`);
+
 	return (
 		<main className="page-wrap px-4 py-12">
 			<section className="island-shell rounded-2xl p-6 sm:p-8">

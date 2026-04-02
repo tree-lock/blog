@@ -23,7 +23,11 @@ const config = defineConfig({
 		devtools(),
 		tsconfigPaths({ projects: ["./tsconfig.json"] }),
 		tailwindcss(),
-		tanstackRouter({ target: "react", autoCodeSplitting: true }),
+		tanstackRouter({
+			target: "react",
+			autoCodeSplitting: true,
+			generatedRouteTree: "./src/route-tree.gen.ts",
+		}),
 		viteReact(),
 	],
 });
