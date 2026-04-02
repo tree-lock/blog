@@ -3,24 +3,24 @@ import ReactDOM from "react-dom/client";
 import { routeTree } from "./route-tree.gen";
 
 const router = createRouter({
-	routeTree,
-	basepath: import.meta.env.BASE_URL,
-	defaultPreload: "intent",
-	scrollRestoration: true,
+  routeTree,
+  basepath: import.meta.env.BASE_URL,
+  defaultPreload: "intent",
+  scrollRestoration: true,
 });
 
 declare module "@tanstack/react-router" {
-	interface Register {
-		router: typeof router;
-	}
+  interface Register {
+    router: typeof router;
+  }
 }
 
 const rootElement = document.getElementById("app");
 if (!rootElement) {
-	throw new Error("Root element #app not found");
+  throw new Error("Root element #app not found");
 }
 
 if (!rootElement.innerHTML) {
-	const root = ReactDOM.createRoot(rootElement);
-	root.render(<RouterProvider router={router} />);
+  const root = ReactDOM.createRoot(rootElement);
+  root.render(<RouterProvider router={router} />);
 }

@@ -5,26 +5,26 @@ import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import "../styles.css";
 
 export const Route = createRootRoute({
-	component: RootComponent,
+  component: RootComponent,
 });
 
 function RootComponent() {
-	return (
-		<>
-			<Outlet />
-			{import.meta.env.DEV ? (
-				<TanStackDevtools
-					config={{
-						position: "bottom-right",
-					}}
-					plugins={[
-						{
-							name: "TanStack Router",
-							render: <TanStackRouterDevtoolsPanel />,
-						},
-					]}
-				/>
-			) : null}
-		</>
-	);
+  return (
+    <>
+      <Outlet />
+      {import.meta.env.DEV ? (
+        <TanStackDevtools
+          config={{
+            position: "bottom-right",
+          }}
+          plugins={[
+            {
+              name: "TanStack Router",
+              render: <TanStackRouterDevtoolsPanel />,
+            },
+          ]}
+        />
+      ) : null}
+    </>
+  );
 }
