@@ -12,7 +12,7 @@ export const Route = createRootRoute({
 function RootComponent() {
   return (
     <ThemeProvider>
-      <div className="pointer-events-none fixed top-0 right-0 z-[100] flex justify-end p-3 sm:p-4">
+      <div className="pointer-events-none fixed top-0 right-0 z-100 flex justify-end p-3 sm:p-4">
         <div className="pointer-events-auto">
           <ThemeToggle />
         </div>
