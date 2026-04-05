@@ -32,7 +32,7 @@ function App() {
 
   return (
     <main className="page-wrap px-4 pb-8 pt-14">
-      <section className="island-shell rise-in relative overflow-hidden rounded-[2rem] px-6 py-10 sm:px-10 sm:py-14">
+      <section className="island-shell rise-in relative overflow-hidden rounded-4xl px-6 py-10 sm:px-10 sm:py-14">
         <div
           className="pointer-events-none absolute -left-20 -top-24 h-56 w-56 rounded-full bg-[radial-gradient(circle,var(--hero-blob-a),transparent_66%)]"
           aria-hidden={true}
@@ -42,10 +42,10 @@ function App() {
           aria-hidden={true}
         />
         <p className="island-kicker mb-3">TreeZLock</p>
-        <h1 className="display-title mb-5 max-w-3xl text-4xl leading-[1.02] font-bold tracking-tight text-[var(--sea-ink)] sm:text-6xl">
+        <h1 className="display-title mb-5 max-w-3xl text-4xl leading-[1.02] font-bold tracking-tight text-(--sea-ink) sm:text-6xl">
           前端场景解决方案合集
         </h1>
-        <p className="m-0 max-w-2xl text-base text-[var(--sea-ink-soft)] sm:text-lg">
+        <p className="m-0 max-w-2xl text-base text-(--sea-ink-soft) sm:text-lg">
           解决并记录前端各场景下，遇到的速度、流畅性、兼容性、异常处理方案的问题。
         </p>
       </section>
@@ -60,10 +60,10 @@ function App() {
             className="island-shell feature-card rise-in rounded-2xl p-5"
             style={{ animationDelay: `${index * 90 + 80}ms` }}
           >
-            <h2 className="mb-2 text-base font-semibold text-[var(--sea-ink)]">
+            <h2 className="mb-2 text-base font-semibold text-(--sea-ink)">
               {title}
             </h2>
-            <p className="m-0 text-sm text-[var(--sea-ink-soft)]">{desc}</p>
+            <p className="m-0 text-sm text-(--sea-ink-soft)">{desc}</p>
           </article>
         ))}
       </section>

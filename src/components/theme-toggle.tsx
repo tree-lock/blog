@@ -57,9 +57,9 @@ export default function ThemeToggle() {
       onClick={handleClick}
       aria-label={label}
       title={label}
-      className="inline-flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-md border border-[var(--chip-line)] bg-[var(--chip-bg)] text-[var(--sea-ink)] shadow-[0_1px_2px_rgba(9,9,11,0.05)] transition hover:bg-[var(--link-bg-hover)]"
+      className="inline-flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-md border border-(--chip-line) bg-(--chip-bg) text-(--sea-ink) shadow-[0_1px_2px_rgba(9,9,11,0.05)] transition hover:bg-(--link-bg-hover)"
     >
-      <Icon className="size-[1.125rem]" aria-hidden strokeWidth={2} />
+      <Icon className="size-4.5" aria-hidden strokeWidth={2} />
     </button>
   );
 }
