@@ -2,7 +2,7 @@
 export const SITE_TITLE = "TreeZLock";
 
 /** Full string shown via typewriter on the home route (`/`). */
-export const HOME_TYPEWRITER_TEXT = "Welcome to TreeZLock";
+export const HOME_TYPEWRITER_TEXT = "欢迎来到 TreeZLock";
 
 /** Delay between each character when typing the welcome title (ms). */
 export const TYPEWRITER_INTERVAL_MS = 100;
