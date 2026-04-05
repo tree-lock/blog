@@ -1,81 +1,65 @@
+import { Monitor, Moon, Sun } from "lucide-react";
 import { useEffect, useState } from "react";
+import {
+  applyThemeMode,
+  getStoredThemeMode,
+  persistThemeMode,
+  type ThemeMode,
+} from "@/lib/theme/mode";
 
-type ThemeMode = "light" | "dark" | "auto";
-
-function getInitialMode(): ThemeMode {
-  if (typeof window === "undefined") {
+function nextMode(mode: ThemeMode): ThemeMode {
+  if (mode === "light") {
+    return "dark";
+  }
+  if (mode === "dark") {
     return "auto";
   }
-
-  const stored = window.localStorage.getItem("theme");
-  if (stored === "light" || stored === "dark" || stored === "auto") {
-    return stored;
-  }
-
-  return "auto";
-}
-
-function applyThemeMode(mode: ThemeMode) {
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  const resolved = mode === "auto" ? (prefersDark ? "dark" : "light") : mode;
-
-  document.documentElement.classList.remove("light", "dark");
-  document.documentElement.classList.add(resolved);
-
-  if (mode === "auto") {
-    document.documentElement.removeAttribute("data-theme");
-  } else {
-    document.documentElement.setAttribute("data-theme", mode);
-  }
-
-  document.documentElement.style.colorScheme = resolved;
+  return "light";
 }
 
 export default function ThemeToggle() {
-  const [mode, setMode] = useState<ThemeMode>("auto");
+  const [mode, setMode] = useState<ThemeMode>(() => getStoredThemeMode());
 
   useEffect(() => {
-    const initialMode = getInitialMode();
-    setMode(initialMode);
-    applyThemeMode(initialMode);
-  }, []);
+    applyThemeMode(mode);
+  }, [mode]);
 
   useEffect(() => {
     if (mode !== "auto") {
       return;
     }
-
     const media = window.matchMedia("(prefers-color-scheme: dark)");
     const onChange = () => applyThemeMode("auto");
-
     media.addEventListener("change", onChange);
     return () => {
       media.removeEventListener("change", onChange);
     };
   }, [mode]);
 
-  function toggleMode() {
-    const nextMode: ThemeMode =
-      mode === "light" ? "dark" : mode === "dark" ? "auto" : "light";
-    setMode(nextMode);
-    applyThemeMode(nextMode);
-    window.localStorage.setItem("theme", nextMode);
+  function handleClick() {
+    const next = nextMode(mode);
+    setMode(next);
+    persistThemeMode(next);
   }
 
   const label =
     mode === "auto"
-      ? "Theme mode: auto (system). Click to switch to light mode."
-      : `Theme mode: ${mode}. Click to switch mode.`;
+      ? "主题：跟随系统。点击切换为浅色模式。"
+      : mode === "light"
+        ? "主题：浅色。点击切换为深色模式。"
+        : "主题：深色。点击切换为跟随系统。";
+
+  const Icon = mode === "auto" ? Monitor : mode === "dark" ? Moon : Sun;
 
   return (
     <button
       type="button"
-      onClick={toggleMode}
+      onClick={handleClick}
       aria-label={label}
       title={label}
-      className="rounded-full border border-[var(--chip-line)] bg-[var(--chip-bg)] px-3 py-1.5 text-sm font-semibold text-[var(--sea-ink)] shadow-[0_1px_2px_rgba(9,9,11,0.05)] transition hover:-translate-y-0.5"
+      className="inline-flex size-9 shrink-0 cursor-pointer items-center justify-center rounded-md border border-[var(--chip-line)] bg-[var(--chip-bg)] text-[var(--sea-ink)] shadow-[0_1px_2px_rgba(9,9,11,0.05)] transition hover:bg-[var(--link-bg-hover)]"
     >
-      {mode === "auto" ? "Auto" : mode === "dark" ? "Dark" : "Light"}
+      <Icon className="size-[1.125rem]" aria-hidden strokeWidth={2} />
     </button>
   );
 }
